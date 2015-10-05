@@ -22,7 +22,6 @@ sealed class MD5
 			0xf7537e82,0xbd3af235,0x2ad7d2bb,0xeb86d391
         };
 
-    // Zie Wikipedia
     protected readonly static int[] s = new int[]
     {
         7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22,
@@ -31,8 +30,6 @@ sealed class MD5
         6, 10, 15, 21, 6, 10, 15, 21, 6, 10, 15, 21, 6, 10, 15, 21
     };
 
-
-    // Standaard waarden
     uint A = 0x67452301;
     uint B = 0xEFCDAB89;
     uint C = 0x98BADCFE;
@@ -135,6 +132,7 @@ sealed class MD5
                         (((uint)bMsg[block+(i)] ))        ;
         }
     }
+
     private byte[] PadBuffer()
     {
 
