@@ -2,7 +2,7 @@
 
 sealed class MD5
 {
-    protected readonly static uint[] T = new uint[] 
+    private readonly static uint[] T = new uint[] 
 		{	
             0xd76aa478,0xe8c7b756,0x242070db,0xc1bdceee,
 			0xf57c0faf,0x4787c62a,0xa8304613,0xfd469501,
@@ -22,7 +22,7 @@ sealed class MD5
 			0xf7537e82,0xbd3af235,0x2ad7d2bb,0xeb86d391
         };
 
-    protected readonly static int[] s = new int[]
+    private readonly static int[] s = new int[]
     {
         7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22,
         5,  9, 14, 20, 5,  9, 14, 20, 5,  9, 14, 20, 5,  9, 14, 20, 
@@ -35,8 +35,8 @@ sealed class MD5
     uint C = 0x98BADCFE;
     uint D = 0X10325476;
 
-    protected uint[] X = new uint[16];
-    private readonly byte[] m_byteInput;
+    private uint[] X = new uint[16];
+    private byte[] m_byteInput;
 
     public MD5(string s)
     {
@@ -48,8 +48,14 @@ sealed class MD5
 
     }
 
-    public string createMD5()
+    public string createMD5(string s)
     {
+        m_byteInput = new byte[s.Length];
+        for (int i = 0; i < s.Length; i++)
+        {
+            m_byteInput[i] = (byte)s[i];
+        }
+
         byte[] paddedBuffer = PadBuffer();
 
         uint N = (uint)(paddedBuffer.Length * 8) / 32;
